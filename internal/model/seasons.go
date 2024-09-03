@@ -1,15 +1,19 @@
 package model
 
-import (
-	"ctx"
-)
+import "context"
 
-func (c DBClient) CreateNewSeason(ctx contetx.Context, in CreateNewSeasonRequest) (out CreateNewSeasonResponse, err error) {
+type CreateNewSeasonRequest struct {
+}
+
+type CreateNewSeasonResponse struct {
+}
+
+func (c DBClient) CreateNewSeason(ctx context.Context, in CreateNewSeasonRequest) (out CreateNewSeasonResponse, err error) {
 	tx, err := c.Begin(ctx)
 	if err != nil {
 		return out, err
 	}
-	defer tx.RollBack(ctx)
+	defer tx.Rollback(ctx)
 
 	return out, tx.Commit(ctx)
 }
