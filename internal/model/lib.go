@@ -12,6 +12,7 @@ import (
 	"github.com/jackc/pgx/v4"
 	"github.com/jackc/pgx/v4/pgxpool"
 	"github.com/jackc/tern/migrate"
+
 	"github.com/lrrountr/racing-draft-api/internal/config"
 	"github.com/lrrountr/racing-draft-api/internal/model/migrations"
 )
