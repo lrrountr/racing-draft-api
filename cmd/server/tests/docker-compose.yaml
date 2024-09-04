@@ -1,0 +1,8 @@
+version: "3.3"
+services:
+  postgres:
+    image: amr-registry.caas.intel.com/celine/oh-postgres:latest
+    ports:
+    - "0:5432"
+    environment:
+    - POSTGRES_PASSWORD=postgres
