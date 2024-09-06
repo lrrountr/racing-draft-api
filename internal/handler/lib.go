@@ -2,7 +2,6 @@ package handler
 
 import (
 	"fmt"
-	"net/http"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -51,16 +50,4 @@ func StartServer(config config.Config) error {
 	AttachHandler(config, e)
 	addr := fmt.Sprintf("%s:%d", config.Server.Address, config.Server.Port)
 	return e.Run(addr)
-}
-
-func ok(c *gin.Context) {
-	c.JSON(http.StatusOK, gin.H{
-		"msg": "OK",
-	})
-}
-
-func AttachHandler(conf config.Config, r *gin.Engine) {
-	//Public health endpoints
-	r.GET("/", ok)
-	r.GET("/health", ok)
 }
