@@ -21,6 +21,19 @@ type DBClient struct {
 	pool *pgxpool.Pool
 }
 
+type PageInfo struct {
+	Total int
+	Next  int
+}
+
+func (i *PageInfo) Update(totalItems, itemsInPage, offset int) {
+	i.Total = totalItems
+	i.Next = offset + itemsInPage
+	if i.Next > totalItems {
+		i.Next = totalItems
+	}
+}
+
 func (c DBClient) Begin(ctx context.Context) (tx pgx.Tx, err error) {
 	tx, err = c.pool.Begin(ctx)
 	if err != nil {
@@ -46,7 +59,7 @@ func NewClient(conf config.Config) (client DBClient, err error) {
 
 	dbConf, err := pgxpool.ParseConfig(
 		fmt.Sprintf(
-			"postgtresql://%s:%s@%s:%d/%s?sslmode=%s",
+			"postgresql://%s:%s@%s:%d/%s?sslmode=%s",
 			dbConfig.User,
 			dbConfig.Password,
 			dbConfig.Host,
@@ -78,7 +91,7 @@ func NewClient(conf config.Config) (client DBClient, err error) {
 	conn := p.Conn()
 	ms, err := migrate.NewMigrator(ctx, conn, migrations.MigrationsTable)
 	if err != nil {
-		return client, fmt.Errorf("could not create migratior: %w", err)
+		return client, fmt.Errorf("could not create migrator: %w", err)
 	}
 
 	ms = migrations.Init(ms)
@@ -115,4 +128,8 @@ func setupTLSPEMBundle(conf config.DBConf) (*x509.CertPool, error) {
 		return nil, errors.New("AWS returned invalid Cert PEMs")
 	}
 	return rootCAs, nil
+}
+
+func (c DBClient) Stat() *pgxpool.Stat {
+	return c.pool.Stat()
 }
