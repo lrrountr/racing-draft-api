@@ -15,7 +15,7 @@ func AttachHandler(conf config.Config, r *gin.Engine) {
 	seasons := r.Group("/api/seasons")
 	seasons.POST("", CreateNewSeason)
 	seasons.GET("", ListSeasons)
-	seasons.PUT("/:id", UpdateSeason)
+	seasons.POST("/:id", UpdateSeason)
 	seasons.GET("/:id", GetSeason)
 	seasons.DELETE("/:id", DeleteSeason)
 
