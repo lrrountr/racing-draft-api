@@ -125,7 +125,7 @@ func (c DBClient) ListSeasons(ctx context.Context, in ListSeasonsRequest) (out L
 	}
 	defer rows.Close()
 
-	row := tx.QueryRow(ctx, listSeasonsTotalSQL)
+	row := tx.QueryRow(ctx, listSeasonsTotalSQL, in.RacingSeries)
 	total := 0
 	err = row.Scan(&total)
 	if err != nil {

@@ -18,7 +18,7 @@ func TestSeasonsBasics(t *testing.T) {
 	reacingSeries := uuid.NewString()
 	year := rand.Intn(2024)
 	active := randBool()
-	_, err := Client.CreateNewSeason(ctx,
+	season, err := Client.CreateNewSeason(ctx,
 		CreateNewSeasonRequest{
 			Name:         name,
 			RacingSeries: reacingSeries,
@@ -27,4 +27,16 @@ func TestSeasonsBasics(t *testing.T) {
 		},
 	)
 	assert.NilError(t, err)
+
+	seasons, err := Client.ListSeasons(ctx,
+		ListSeasonsRequest{
+			RacingSeries: reacingSeries,
+			Limit:        2,
+		},
+	)
+	assert.NilError(t, err)
+	assert.Equal(t, len(seasons.Seasons), 1)
+	assert.Equal(t, seasons.Seasons[0].UUID, season.UUID)
+	assert.Equal(t, seasons.PageInfo.Next, 1)
+	assert.Equal(t, seasons.PageInfo.Total, 1)
 }
