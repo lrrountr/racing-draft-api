@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/jackc/tern/migrate"
+
 	"github.com/lrrountr/racing-draft-api/internal/model/migrations"
 )
 
