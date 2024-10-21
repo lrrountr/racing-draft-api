@@ -22,8 +22,8 @@ func AttachHandler(conf config.Config, r *gin.Engine) {
 	//Users endpoints
 	users := r.Group("/api/users")
 	users.POST("", CreateUser)
-	seasons.GET("", ListUsers)
-	seasons.POST("/:id", UpdateUser)
-	seasons.GET("/:id", GetUser)
-	seasons.DELETE("/:id", DeleteUser)
+	users.GET("", ListUsers)
+	users.POST("/:id", UpdateUser)
+	users.GET("/:id", GetUser)
+	users.DELETE("/:id", DeleteUser)
 }

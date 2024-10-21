@@ -31,7 +31,7 @@ func AttachDatabase(c *gin.Context, db model.DBClient) {
 func LoadDatabase(c *gin.Context) model.DBClient {
 	db, ok := c.Get(DatabaseContextKey)
 	if !ok {
-		panic("Da")
+		panic("Database not set. This is a dev error.")
 	}
 	return db.(model.DBClient)
 }
