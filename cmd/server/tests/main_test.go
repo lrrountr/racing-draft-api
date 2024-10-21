@@ -12,11 +12,12 @@ import (
 	"time"
 
 	"github.com/google/uuid"
+	"gotest.tools/v3/assert"
+
 	"github.com/lrrountr/racing-draft-api/internal/config"
 	"github.com/lrrountr/racing-draft-api/internal/handler"
 	"github.com/lrrountr/racing-draft-api/internal/model"
 	shared "github.com/lrrountr/racing-draft-api/pkg/racing-draft"
-	"gotest.tools/v3/assert"
 )
 
 var (

@@ -7,8 +7,9 @@ import (
 	"time"
 
 	"github.com/google/uuid"
-	shared "github.com/lrrountr/racing-draft-api/pkg/racing-draft"
 	"gotest.tools/v3/assert"
+
+	shared "github.com/lrrountr/racing-draft-api/pkg/racing-draft"
 )
 
 func TestCreateNewSeason(t *testing.T) {
