@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+
 	"github.com/lrrountr/racing-draft-api/internal/clients"
 	"github.com/lrrountr/racing-draft-api/internal/model"
 )
