@@ -13,6 +13,9 @@ type CreateNewSeasonRequest struct {
 	Active       bool   `json:"active"`
 }
 
+type CreateNewSeasonResponse struct {
+}
+
 func CreateNewSeason(c *gin.Context) {
 	b := CreateNewSeasonRequest{}
 	ok := BindJSONOrAbort(c, &b)
