@@ -113,7 +113,7 @@ func (c *client) doRequest(ctx context.Context, method, uri string, body io.Read
 	default:
 		accessToken, err := c.getAccessToken()
 		if err != nil {
-			return nil, errorf("Failed to get access token", http.StatusUnauthorized, err)
+			return nil, errorf("failed to get access token", http.StatusUnauthorized, err)
 		}
 
 		req.Header.Add("Authorization", fmt.Sprintf("Bearer %s", accessToken))
@@ -134,7 +134,7 @@ func (c *client) doRequest(ctx context.Context, method, uri string, body io.Read
 
 	resp, e = c.Do(req)
 	if e != nil {
-		return nil, errorf("Could not execute HTTP request", http.StatusInternalServerError, e)
+		return nil, errorf("could not execute HTTP request", http.StatusInternalServerError, e)
 	}
 
 	if resp.StatusCode < http.StatusOK || resp.StatusCode > 299 {

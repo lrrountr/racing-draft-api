@@ -19,9 +19,8 @@ type CreateNewSeasonResponse struct {
 
 func CreateNewSeason(c *gin.Context) {
 	b := CreateNewSeasonRequest{}
-	ok := BindJSONOrAbort(c, &b)
-	if !ok {
-		NotAcceptable(c, "season could not be created")
+	if BindJSONOrAbort(c, &b) {
+		return
 	}
 
 	db := clients.LoadDatabase(c)
@@ -33,6 +32,7 @@ func CreateNewSeason(c *gin.Context) {
 	})
 	if err != nil {
 		InternalServerError(c, "failed to create season", err)
+		return
 	}
 
 	OK(c, gin.H{
